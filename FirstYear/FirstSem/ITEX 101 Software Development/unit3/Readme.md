@@ -1403,3 +1403,266 @@ Here are examples combining multiple regular expression patterns to solve common
 
 These complex patterns demonstrate how different regex elements can be combined to create powerful matching patterns for real-world scenarios.
 
+# Web Scripting (CGI, HTTP, HTML)
+
+## Common Gateway Interface (CGI)
+
+### Definition
+CGI is a standard protocol that enables web servers to execute programs and scripts, generating dynamic content for web pages.
+
+### Basic CGI Script Structure
+```bash
+#!/bin/bash
+echo "Content-type: text/html"
+echo ""
+echo "<html>"
+echo "<head><title>CGI Script</title></head>"
+echo "<body>"
+echo "<h1>Hello from CGI!</h1>"
+echo "</body>"
+echo "</html>"
+```
+
+### Common CGI Environment Variables
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `REQUEST_METHOD` | HTTP method used | GET, POST |
+| `QUERY_STRING` | URL parameters | name=value&other=data |
+| `REMOTE_ADDR` | Client's IP address | 192.168.1.1 |
+| `HTTP_USER_AGENT` | Browser information | Mozilla/5.0... |
+| `CONTENT_LENGTH` | Length of POST data | 1024 |
+| `CONTENT_TYPE` | Type of POST data | application/x-www-form-urlencoded |
+
+### Processing Form Data
+```bash
+#!/bin/bash
+echo "Content-type: text/html"
+echo ""
+
+# Process GET data
+if [ "$REQUEST_METHOD" = "GET" ]; then
+    # Parse QUERY_STRING
+    IFS='&' read -ra PARAMS <<< "$QUERY_STRING"
+    for param in "${PARAMS[@]}"; do
+        IFS='=' read -r key value <<< "$param"
+        echo "Parameter $key = $value<br>"
+    done
+fi
+
+# Process POST data
+if [ "$REQUEST_METHOD" = "POST" ]; then
+    read -n "$CONTENT_LENGTH" POST_DATA
+    echo "Received POST data: $POST_DATA<br>"
+fi
+```
+
+## HTTP Protocol
+
+### HTTP Methods
+| Method | Description | Example Usage |
+|--------|-------------|---------------|
+| GET | Retrieve data | `GET /page.html HTTP/1.1` |
+| POST | Submit data | `POST /submit.php HTTP/1.1` |
+| PUT | Update resource | `PUT /update.php HTTP/1.1` |
+| DELETE | Remove resource | `DELETE /remove.php HTTP/1.1` |
+| HEAD | Get headers only | `HEAD /status.html HTTP/1.1` |
+
+### HTTP Status Codes
+| Code | Category | Examples |
+|------|----------|----------|
+| 2xx | Success | 200 OK, 201 Created |
+| 3xx | Redirection | 301 Moved, 304 Not Modified |
+| 4xx | Client Error | 404 Not Found, 403 Forbidden |
+| 5xx | Server Error | 500 Internal Error, 503 Service Unavailable |
+
+### HTTP Headers
+```bash
+# Request Headers
+GET /index.html HTTP/1.1
+Host: www.example.com
+User-Agent: Mozilla/5.0
+Accept: text/html
+Cookie: session=abc123
+
+# Response Headers
+HTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length: 1234
+Set-Cookie: session=xyz789
+```
+
+## HTML Generation
+
+### Basic HTML Structure
+```bash
+#!/bin/bash
+
+generate_html() {
+    cat << EOF
+<!DOCTYPE html>
+<html>
+<head>
+    <title>$1</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h1>$2</h1>
+    $3
+</body>
+</html>
+EOF
+}
+
+# Usage
+generate_html "Page Title" "Welcome" "<p>Content goes here</p>"
+```
+
+### Common HTML Elements Generation
+```bash
+# Generate a table
+generate_table() {
+    echo "<table border='1'>"
+    echo "<tr><th>Header 1</th><th>Header 2</th></tr>"
+    while IFS=',' read -r col1 col2; do
+        echo "<tr><td>$col1</td><td>$col2</td></tr>"
+    done
+    echo "</table>"
+}
+
+# Generate a form
+generate_form() {
+    cat << EOF
+<form method="post" action="$1">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name"><br>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email"><br>
+    <input type="submit" value="Submit">
+</form>
+EOF
+}
+```
+
+### Dynamic Content Generation
+```bash
+#!/bin/bash
+
+# Generate dynamic list from directory contents
+generate_file_list() {
+    echo "<ul>"
+    for file in *; do
+        echo "<li>$file</li>"
+    done
+    echo "</ul>"
+}
+
+# Generate dynamic table from data file
+generate_data_table() {
+    echo "<table border='1'>"
+    echo "<tr><th>Name</th><th>Value</th></tr>"
+    while IFS='=' read -r key value; do
+        echo "<tr><td>$key</td><td>$value</td></tr>"
+    done < "$1"
+    echo "</table>"
+}
+```
+
+### Error Handling
+```bash
+#!/bin/bash
+
+handle_error() {
+    cat << EOF
+Content-type: text/html
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Error</title>
+</head>
+<body>
+    <h1>Error</h1>
+    <p style="color: red;">$1</p>
+    <a href="javascript:history.back()">Go Back</a>
+</body>
+</html>
+EOF
+    exit 1
+}
+
+# Usage
+[ -f "$FILE" ] || handle_error "File not found!"
+```
+
+### Security Considerations
+
+#### Input Validation
+```bash
+validate_input() {
+    # Remove special characters
+    local clean_input=$(echo "$1" | sed 's/[^a-zA-Z0-9 ]//g')
+    echo "$clean_input"
+}
+
+# HTML Escaping
+html_escape() {
+    echo "$1" | sed 's/&/\&amp;/g; s/</\&lt;/g; s/>/\&gt;/g; s/"/\&quot;/g; s/'"'"'/\&#39;/g'
+}
+```
+
+#### File Upload Handling
+```bash
+handle_file_upload() {
+    # Check file size
+    [ "$CONTENT_LENGTH" -gt 1048576 ] && handle_error "File too large!"
+
+    # Check file type
+    content_type=$(file -b --mime-type "$1")
+    case "$content_type" in
+        image/jpeg|image/png|image/gif)
+            # Process allowed file type
+            ;;
+        *)
+            handle_error "Invalid file type!"
+            ;;
+    esac
+}
+```
+
+### Example Complete CGI Script
+```bash
+#!/bin/bash
+
+# Set content type
+echo "Content-type: text/html"
+echo ""
+
+# Include common functions
+source "/path/to/common_functions.sh"
+
+# Handle different request methods
+case "$REQUEST_METHOD" in
+    GET)
+        # Display form
+        generate_form "/cgi-bin/script.cgi"
+        ;;
+    POST)
+        # Process form data
+        read -n "$CONTENT_LENGTH" POST_DATA
+        
+        # Validate and process input
+        name=$(echo "$POST_DATA" | grep -o 'name=[^&]*' | cut -d= -f2)
+        name=$(validate_input "$name")
+        name=$(html_escape "$name")
+        
+        # Generate response
+        generate_html "Success" "Thank you, $name!" "<p>Form processed successfully.</p>"
+        ;;
+    *)
+        handle_error "Invalid request method!"
+        ;;
+esac
+```
+
+This section provides a comprehensive overview of web scripting using shell scripts, covering CGI, HTTP, and HTML generation, with practical examples and security considerations.
+
