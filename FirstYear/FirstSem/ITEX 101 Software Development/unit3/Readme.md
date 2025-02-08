@@ -530,3 +530,876 @@
 - `find /path/to/search -exec rm {} \;`
   - Output: `Deleted files`
   - Description: Finds and deletes files matching the search criteria.
+
+# 3.2 File Editing
+
+## NANO
+
+**Definition:**
+- The `nano` command is a simple, user-friendly text editor for Unix-like systems.
+
+**Syntax:**
+- `nano [options] <file>`
+
+**Basic Navigation Commands:**
+- `Ctrl + P` or `↑`: Move cursor up one line
+- `Ctrl + N` or `↓`: Move cursor down one line  
+- `Ctrl + F` or `→`: Move cursor forward one character
+- `Ctrl + B` or `←`: Move cursor back one character
+- `Ctrl + A`: Move to beginning of line
+- `Ctrl + E`: Move to end of line
+- `Ctrl + V`: Move down one page
+- `Ctrl + Y`: Move up one page
+
+**Editing Commands:**
+- `Ctrl + O`: Save file
+- `Ctrl + X`: Exit nano
+- `Ctrl + K`: Cut current line
+- `Ctrl + U`: Paste cut text
+- `Ctrl + J`: Justify current paragraph
+- `Alt + U`: Undo last action
+- `Alt + E`: Redo last action
+- `Ctrl + I`: Insert tab
+- `Ctrl + M`: Insert new line
+
+**Examples:**
+- `nano file.txt`
+  - Output: `Opens file.txt in nano editor`
+  - Description: Opens `file.txt` for editing in the nano text editor.
+- `nano -B file.txt`
+  - Output: `Creates a backup of file.txt`
+  - Description: Opens `file.txt` in nano and creates a backup before editing.
+- `nano +10 file.txt`
+  - Output: `Opens file.txt at line 10`
+  - Description: Opens `file.txt` and places the cursor at line 10.
+- `nano -m file.txt`
+  - Output: `Opens file.txt with mouse support`
+  - Description: Opens `file.txt` with mouse support enabled for easier navigation.
+- `nano -l file.txt`
+  - Output: `Opens file.txt with line numbers`
+  - Description: Opens `file.txt` displaying line numbers for easier reference.
+
+## VIM
+
+**Definition:**
+- The `vim` command is a highly configurable text editor built to enable efficient text editing.
+
+**Syntax:**
+- `vim [options] <file>`
+
+**Basic Navigation Commands:**
+- `h`: Move cursor left
+- `j`: Move cursor down
+- `k`: Move cursor up
+- `l`: Move cursor right
+- `gg`: Go to the first line of the file
+- `G`: Go to the last line of the file
+- `0`: Move to the beginning of the line
+- `$`: Move to the end of the line
+- `w`: Move to the next word
+- `b`: Move to the previous word
+
+**Editing Commands:**
+- `i`: Enter insert mode before the cursor
+- `a`: Enter insert mode after the cursor
+- `o`: Open a new line below the current line and enter insert mode
+- `dd`: Delete the current line
+- `yy`: Yank (copy) the current line
+- `p`: Paste the yanked or deleted text after the cursor
+- `u`: Undo the last change
+- `Ctrl + r`: Redo the last undone change
+- `:w`: Save the file
+- `:q`: Quit vim
+- `:wq`: Save and quit vim
+- `:q!`: Quit vim without saving changes
+
+**Examples:**
+- `vim file.txt`
+  - Output: `Opens file.txt in vim editor`
+  - Description: Opens `file.txt` for editing in the vim text editor.
+- `vim +/pattern file.txt`
+  - Output: `Opens file.txt and searches for pattern`
+  - Description: Opens `file.txt` and places the cursor at the first occurrence of "pattern".
+- `vim -R file.txt`
+  - Output: `Opens file.txt in read-only mode`
+  - Description: Opens `file.txt` in read-only mode to prevent accidental changes.
+- `vim -c "set number" file.txt`
+  - Output: `Opens file.txt with line numbers`
+  - Description: Opens `file.txt` with line numbers displayed.
+- `vim -c "normal gg=G" file.txt`
+  - Output: `Opens file.txt and auto-indents the entire file`
+  - Description: Opens `file.txt` and automatically indents all lines for better readability.
+
+## EMACS
+
+**Definition:**
+- The `emacs` command is a powerful, extensible text editor with a wide range of features.
+
+**Syntax:**
+- `emacs [options] <file>`
+
+**Basic Navigation Commands:**
+- `Ctrl + f`: Move cursor forward one character
+- `Ctrl + b`: Move cursor backward one character
+- `Ctrl + n`: Move cursor to the next line
+- `Ctrl + p`: Move cursor to the previous line
+- `Alt + f`: Move cursor forward one word
+- `Alt + b`: Move cursor backward one word
+- `Ctrl + a`: Move to the beginning of the line
+- `Ctrl + e`: Move to the end of the line
+- `Alt + <`: Move to the beginning of the buffer
+- `Alt + >`: Move to the end of the buffer
+
+**Editing Commands:**
+- `Ctrl + d`: Delete the character under the cursor
+- `Ctrl + k`: Kill (cut) text from the cursor to the end of the line
+- `Ctrl + y`: Yank (paste) the last killed text
+- `Ctrl + _`: Undo the last change
+- `Ctrl + x Ctrl + s`: Save the current buffer
+- `Ctrl + x Ctrl + c`: Exit emacs
+- `Ctrl + x u`: Undo the last change
+- `Alt + x replace-string`: Replace a string in the buffer
+- `Ctrl + x Ctrl + f`: Open a file
+
+**Examples:**
+- `emacs file.txt`
+  - Output: `Opens file.txt in emacs editor`
+  - Description: Opens `file.txt` for editing in the emacs text editor.
+- `emacs -nw file.txt`
+  - Output: `Opens file.txt in emacs without GUI`
+  - Description: Opens `file.txt` in emacs in the terminal without the graphical interface.
+- `emacs --batch -l script.el`
+  - Output: `Runs script.el in batch mode`
+  - Description: Executes the emacs lisp script `script.el` in batch mode.
+- `emacs -q file.txt`
+  - Output: `Opens file.txt without loading init file`
+  - Description: Opens `file.txt` without loading the user's init file for a clean session.
+- `emacs -r file.txt`
+  - Output: `Opens file.txt in read-only mode`
+  - Description: Opens `file.txt` in read-only mode to prevent accidental changes.
+
+## SED
+
+**Definition:**
+- The `sed` command is a stream editor used to perform basic text transformations on an input stream.
+
+**Syntax:**
+- `sed [options] 'command' <file>`
+
+**Basic Commands:**
+- `s/old/new/`: Substitute the first occurrence of "old" with "new" in each line.
+- `s/old/new/g`: Substitute all occurrences of "old" with "new" in each line.
+- `d`: Delete lines matching a pattern.
+- `p`: Print lines matching a pattern.
+- `-n`: Suppress automatic printing of pattern space.
+
+**Examples:**
+- `sed 's/old/new/' file.txt`
+  - Output: `Replaces the first occurrence of old with new in each line of file.txt`
+  - Description: Performs a substitution of "old" with "new" for the first occurrence in each line of `file.txt`.
+- `sed 's/old/new/g' file.txt`
+  - Output: `Replaces all occurrences of old with new in file.txt`
+  - Description: Performs a global substitution of "old" with "new" in `file.txt`.
+- `sed -n '5,10p' file.txt`
+  - Output: `Prints lines 5 to 10 of file.txt`
+  - Description: Displays lines 5 through 10 of `file.txt`.
+- `sed '/pattern/d' file.txt`
+  - Output: `Deletes lines containing pattern`
+  - Description: Removes lines containing "pattern" from `file.txt`.
+- `sed '2d' file.txt`
+  - Output: `Deletes the second line of file.txt`
+  - Description: Deletes the second line from `file.txt`.
+- `sed 's/^/Prefix: /' file.txt`
+  - Output: `Adds "Prefix: " to the beginning of each line in file.txt`
+  - Description: Adds a prefix to each line in `file.txt`.
+- `sed 's/$/ :Suffix/' file.txt`
+  - Output: `Adds " :Suffix" to the end of each line in file.txt`
+  - Description: Appends a suffix to each line in `file.txt`.
+
+## VI
+
+**Definition:**
+- The `vi` command is a screen-oriented text editor originally created for the Unix operating system.
+
+**Syntax:**
+- `vi [options] <file>`
+
+**Basic Navigation Commands:**
+- `h`: Move cursor left
+- `j`: Move cursor down
+- `k`: Move cursor up
+- `l`: Move cursor right
+- `gg`: Go to the first line of the file
+- `G`: Go to the last line of the file
+- `0`: Move to the beginning of the line
+- `$`: Move to the end of the line
+- `w`: Move to the next word
+- `b`: Move to the previous word
+
+**Editing Commands:**
+- `i`: Enter insert mode before the cursor
+- `a`: Enter insert mode after the cursor
+- `o`: Open a new line below the current line and enter insert mode
+- `dd`: Delete the current line
+- `yy`: Yank (copy) the current line
+- `p`: Paste the yanked or deleted text after the cursor
+- `u`: Undo the last change
+- `Ctrl + r`: Redo the last undone change
+- `:w`: Save the file
+- `:q`: Quit vi
+- `:wq`: Save and quit vi
+- `:q!`: Quit vi without saving changes
+
+**Examples:**
+- `vi file.txt`
+  - Output: `Opens file.txt in vi editor`
+  - Description: Opens `file.txt` for editing in the vi text editor.
+- `vi +/pattern file.txt`
+  - Output: `Opens file.txt and searches for pattern`
+  - Description: Opens `file.txt` and places the cursor at the first occurrence of "pattern".
+- `vi -R file.txt`
+  - Output: `Opens file.txt in read-only mode`
+  - Description: Opens `file.txt` in read-only mode to prevent accidental changes.
+- `vi -c "set number" file.txt`
+  - Output: `Opens file.txt with line numbers`
+  - Description: Opens `file.txt` with line numbers displayed.
+- `vi -c "normal gg=G" file.txt`
+  - Output: `Opens file.txt and auto-indents the entire file`
+  - Description: Opens `file.txt` and automatically indents all lines for better readability.
+
+# Shell Scripting
+
+## Why Shell Scripting is Required
+
+**Definition:**
+- Shell scripting is a powerful way to automate tasks, manage system operations, and streamline repetitive processes in Unix-like operating systems. It allows users to write scripts that can execute a series of commands, making it easier to perform complex tasks efficiently.
+
+**Benefits:**
+- **Automation:** Automates repetitive tasks, reducing manual effort and minimizing errors.
+- **Efficiency:** Executes multiple commands in a sequence, saving time and resources.
+- **Flexibility:** Can be used for a wide range of tasks, from simple file operations to complex system administration.
+- **Portability:** Scripts can be run on any system with a compatible shell, making them highly portable.
+- **Integration:** Easily integrates with other tools and applications, enhancing functionality.
+
+## Data Types in Shell Scripting
+
+Shell scripting primarily deals with strings and numbers. Here are some common data types:
+
+| Data Type | Description |
+|-----------|-------------|
+| String    | A sequence of characters. |
+| Integer   | Whole numbers, used for arithmetic operations. |
+| Array     | A collection of values indexed by numbers. |
+
+## Special Variables in Shell Scripting
+
+Shell scripting provides several special variables that are used to access information about the script's execution environment and parameters. Here are some of the most commonly used special variables:
+
+| Variable | Description |
+|----------|-------------|
+| `$0`     | The name of the script being executed. |
+| `$1, $2, ...` | Positional parameters representing arguments passed to the script. |
+| `$#`     | The number of positional parameters passed to the script. |
+| `$@`     | All the positional parameters as separate words. |
+| `$*`     | All the positional parameters as a single word. |
+| `$?`     | The exit status of the last executed command. |
+| `$$`     | The process ID of the current shell. |
+| `$!`     | The process ID of the last background command. |
+| `$_`     | The last argument to the previous command. |
+
+### Examples
+
+**Example Script: special_vars.sh**
+```bash
+#!/bin/bash
+# This script demonstrates the use of special variables
+
+echo "Script name: $0"
+echo "First argument: $1"
+echo "Second argument: $2"
+echo "Number of arguments: $#"
+echo "All arguments (individually): $@"
+echo "All arguments (as a single string): $*"
+echo "Process ID of the script: $$"
+
+# Run a background command
+sleep 5 &
+echo "Process ID of the last background command: $!"
+
+# Exit with a specific status
+exit 0
+```
+
+**Running the Script**
+```bash
+./special_vars.sh arg1 arg2
+```
+
+**Expected Output**
+```
+Script name: ./special_vars.sh
+First argument: arg1
+Second argument: arg2
+Number of arguments: 2
+All arguments (individually): arg1 arg2
+All arguments (as a single string): arg1 arg2
+Process ID of the script: 12345
+Process ID of the last background command: 12346
+```
+
+**Description:**
+- This script demonstrates how to use special variables to access script metadata and parameters. It prints the script name, arguments, and process IDs, showcasing the utility of these variables in managing script execution.
+
+## Using Variables in Shell Scripting
+
+Variables in shell scripting are used to store data that can be referenced and manipulated throughout the script. They are essential for creating dynamic and flexible scripts.
+
+### Declaring Variables
+
+- **Syntax**: Variables are declared without a `$` sign and are assigned using the `=` operator. There should be no spaces around the `=` sign.
+  ```bash
+  my_variable="Hello, World!"
+  ```
+
+### Accessing Variables
+
+- **Syntax**: Use the `$` sign to access the value of a variable.
+  ```bash
+  echo $my_variable
+  ```
+
+### Variable Operations
+
+- **String Concatenation**: Combine strings using variables.
+  ```bash
+  first="Hello"
+  second="World"
+  greeting="$first, $second!"
+  echo $greeting
+  ```
+
+- **Arithmetic Operations**: Use `expr` or `$(( ))` for arithmetic operations.
+  ```bash
+  num1=5
+  num2=10
+  sum=$(expr $num1 + $num2)
+  echo "Sum using expr: $sum"
+
+  sum=$((num1 + num2))
+  echo "Sum using arithmetic expansion: $sum"
+  ```
+
+### Example Script: using_vars.sh
+
+```bash
+#!/bin/bash
+# This script demonstrates the use of variables
+
+# Declare variables
+name="Alice"
+age=30
+
+# Access variables
+echo "Name: $name"
+echo "Age: $age"
+
+# Modify variables
+age=$((age + 1))
+echo "Next year, $name will be $age years old."
+
+# Use environment variable
+export GREETING="Hello"
+echo "$GREETING, $name!"
+```
+
+**Running the Script**
+```bash
+./using_vars.sh
+```
+
+**Expected Output**
+```
+Name: Alice
+Age: 30
+Next year, Alice will be 31 years old.
+Hello, Alice!
+```
+
+**Description:**
+- This script demonstrates how to declare, access, and modify variables. It also shows how to use environment variables and perform arithmetic operations.
+
+## Creating and Running Shell Scripts
+
+### Creating a Shell Script
+
+1. **Create a new file**: Use a text editor like `nano`, `vim`, or `emacs` to create a new file with a `.sh` extension.
+   ```bash
+   nano myscript.sh
+   ```
+
+2. **Add the shebang**: At the top of the file, add the shebang line to specify the script interpreter.
+   ```bash
+   #!/bin/bash
+   ```
+
+3. **Write your script**: Add your shell commands below the shebang line.
+
+4. **Save and exit**: Save the file and exit the editor.
+
+### Running a Shell Script
+
+1. **Make the script executable**: Use the `chmod` command to make the script executable.
+   ```bash
+   chmod +x myscript.sh
+   ```
+
+2. **Execute the script**: Run the script using the following command.
+   ```bash
+   ./myscript.sh
+   ```
+
+## Shell Scripting Elements
+
+### Declaring Variables
+
+- **Syntax**: Variables are declared without a `$` sign and are assigned using the `=` operator.
+  ```bash
+  my_variable="Hello, World!"
+  ```
+
+- **Accessing Variables**: Use the `$` sign to access the value of a variable.
+  ```bash
+  echo $my_variable
+  ```
+
+### Conditional Statements
+
+- **If-Else Statement**:
+  ```bash
+  if [ condition ]; then
+    # commands
+  elif [ another_condition ]; then
+    # commands
+  else
+    # commands
+  fi
+  ```
+
+### Loops
+
+- **For Loop**:
+  ```bash
+  for i in {1..5}; do
+    echo "Iteration $i"
+  done
+  ```
+
+- **While Loop**:
+  ```bash
+  while [ condition ]; do
+    # commands
+  done
+  ```
+
+### Functions
+
+- **Defining a Function**:
+  ```bash
+  my_function() {
+    echo "This is a function"
+  }
+  ```
+
+- **Calling a Function**:
+  ```bash
+  my_function
+  ```
+
+## Example Shell Script
+
+```bash
+#!/bin/bash
+# This script demonstrates basic shell scripting elements
+
+# Declare a variable
+greeting="Hello, World!"
+
+# Function definition
+print_greeting() {
+  echo $greeting
+}
+
+# Conditional statement
+if [ -n "$greeting" ]; then
+  print_greeting
+else
+  echo "No greeting found."
+fi
+
+# Loop
+for i in {1..3}; do
+  echo "Loop iteration $i"
+done
+```
+
+## String Processing in Shell Scripting
+
+String processing is a crucial part of shell scripting, allowing you to manipulate and analyze text data. Here are some common techniques and examples for processing strings in shell scripts.
+
+### String Length
+
+- **Syntax**: Use `${#variable}` to get the length of a string.
+  ```bash
+  str="Hello, World!"
+  echo "Length of string: ${#str}"
+  ```
+
+### Substring Extraction
+
+- **Syntax**: Use `${variable:position:length}` to extract a substring.
+  ```bash
+  str="Hello, World!"
+  echo "Substring: ${str:7:5}"  # Outputs "World"
+  ```
+
+### String Replacement
+
+- **Syntax**: Use `${variable/old/new}` for replacing the first occurrence and `${variable//old/new}` for replacing all occurrences.
+  ```bash
+  str="Hello, World!"
+  echo "${str/World/Shell}"  # Outputs "Hello, Shell!"
+  echo "${str//o/O}"         # Outputs "HellO, WOrld!"
+  ```
+
+### String Concatenation
+
+- **Syntax**: Simply place variables or strings next to each other.
+  ```bash
+  str1="Hello"
+  str2="World"
+  combined="$str1, $str2!"
+  echo $combined  # Outputs "Hello, World!"
+  ```
+
+### String Splitting
+
+- **Example**: Use `IFS` (Internal Field Separator) to split a string into an array.
+  ```bash
+  str="apple,banana,cherry"
+  IFS=',' read -r -a fruits <<< "$str"
+  echo "First fruit: ${fruits[0]}"  # Outputs "apple"
+  ```
+
+### String Comparison
+
+- **Syntax**: Use `=` for equality and `!=` for inequality in conditional statements.
+  ```bash
+  str1="Hello"
+  str2="World"
+  if [ "$str1" = "$str2" ]; then
+    echo "Strings are equal"
+  else
+    echo "Strings are not equal"
+  fi
+  ```
+
+### Example Script: string_processing.sh
+
+```bash
+#!/bin/bash
+# This script demonstrates string processing techniques
+
+# String length
+str="Hello, World!"
+echo "Length of string: ${#str}"
+
+# Substring extraction
+echo "Substring: ${str:7:5}"
+
+# String replacement
+echo "Replace 'World' with 'Shell': ${str/World/Shell}"
+echo "Replace all 'o' with 'O': ${str//o/O}"
+
+# String concatenation
+str1="Hello"
+str2="World"
+combined="$str1, $str2!"
+echo "Concatenated string: $combined"
+
+# String splitting
+str="apple,banana,cherry"
+IFS=',' read -r -a fruits <<< "$str"
+echo "First fruit: ${fruits[0]}"
+
+# String comparison
+if [ "$str1" = "$str2" ]; then
+  echo "Strings are equal"
+else
+  echo "Strings are not equal"
+fi
+```
+
+**Running the Script**
+```bash
+./string_processing.sh
+```
+
+**Expected Output**
+```
+Length of string: 13
+Substring: World
+Replace 'World' with 'Shell': Hello, Shell!
+Replace all 'o' with 'O': HellO, WOrld!
+Concatenated string: Hello, World!
+First fruit: apple
+Strings are not equal
+```
+
+**Description:**
+- This script demonstrates various string processing techniques, including length calculation, substring extraction, replacement, concatenation, splitting, and comparison. These operations are essential for handling text data in shell scripts.
+
+## Regular Expressions in Shell Scripting
+
+Regular expressions (regex) are powerful tools for pattern matching and text processing. They are used in various commands and programming languages to search, match, and manipulate text.
+
+### Common Regular Expression Patterns
+
+| Pattern | Description |
+|---------|-------------|
+| `.`     | Matches any single character except a newline. |
+| `*`     | Matches zero or more occurrences of the preceding element. |
+| `+`     | Matches one or more occurrences of the preceding element. |
+| `?`     | Matches zero or one occurrence of the preceding element. |
+| `^`     | Matches the start of a line. |
+| `$`     | Matches the end of a line. |
+| `[abc]` | Matches any one of the characters a, b, or c. |
+| `[^abc]`| Matches any character except a, b, or c. |
+| `(a|b)` | Matches either a or b. |
+| `\d`    | Matches any digit (equivalent to `[0-9]`). |
+| `\w`    | Matches any word character (equivalent to `[a-zA-Z0-9_]`). |
+| `\s`    | Matches any whitespace character. |
+
+### Regular Expression Examples
+
+#### 1. Single Character (`.`)
+
+**Definition:** The dot (.) is a special metacharacter in regular expressions that matches exactly one occurrence of any character except a newline character. It is often called a "wildcard" character.
+
+| Pattern | Matches | Description |
+|---------|---------|-------------|
+| `c.t`   | cat, cot, cut | Any character between 'c' and 't' |
+| `h.t`   | hat, hot, hit | Any character between 'h' and 't' |
+| `d.g`   | dog, dig, dug | Any character between 'd' and 'g' |
+| `b.d`   | bad, bid, bud | Any character between 'b' and 'd' |
+| `r.n`   | run, ran, rin | Any character between 'r' and 'n' |
+
+#### 2. Zero or More (`*`)
+
+**Definition:** The asterisk (*) matches zero or more occurrences of the preceding character or group. It's useful when you want to match something that may or may not appear multiple times.
+
+| Pattern | Matches | Description |
+|---------|---------|-------------|
+| `ab*c`  | ac, abc, abbc | Zero or more 'b's between 'a' and 'c' |
+| `hi*`   | h, hi, hiii | Zero or more 'i's after 'h' |
+| `do*g`  | dg, dog, dooog | Zero or more 'o's between 'd' and 'g' |
+| `ca*t`  | ct, cat, caaat | Zero or more 'a's between 'c' and 't' |
+| `mo*n`  | mn, mon, mooon | Zero or more 'o's between 'm' and 'n' |
+
+#### 3. One or More (`+`)
+
+**Definition:** The plus sign (+) matches one or more occurrences of the preceding character or group. Similar to *, but requires at least one occurrence.
+
+| Pattern | Matches | Description |
+|---------|---------|-------------|
+| `ab+c`  | abc, abbc, abbbc | One or more 'b's between 'a' and 'c' |
+| `hi+`   | hi, hii, hiii | One or more 'i's after 'h' |
+| `do+g`  | dog, doog, dooog | One or more 'o's between 'd' and 'g' |
+| `ca+t`  | cat, caat, caaat | One or more 'a's between 'c' and 't' |
+| `mo+n`  | mon, moon, mooon | One or more 'o's between 'm' and 'n' |
+
+#### 4. Zero or One (`?`)
+
+**Definition:** The question mark (?) makes the preceding character or group optional by matching zero or one occurrence. It's particularly useful for handling variations in spelling or optional parts of a pattern.
+
+| Pattern | Matches | Description |
+|---------|---------|-------------|
+| `colou?r` | color, colour | Optional 'u' in color/colour |
+| `https?` | http, https | Optional 's' in http/https |
+| `Feb?ruary` | February, February | Optional 'b' in February |
+| `who?le` | whole, wole | Optional 'h' in whole |
+| `tho?ught` | thought, thoght | Optional 'o' in thought |
+
+#### 5. Start of Line (`^`)
+
+**Definition:** The caret (^) asserts the position at the start of a line. When used at the beginning of a pattern, it ensures that the match occurs at the start of the line.
+
+| Pattern | Matches | Description |
+|---------|---------|-------------|
+| `^Hello` | Hello world | Lines starting with "Hello" |
+| `^The` | The cat | Lines starting with "The" |
+| `^[0-9]` | 1st line | Lines starting with a digit |
+| `^A` | Apple pie | Lines starting with 'A' |
+| `^Start` | Start here | Lines starting with "Start" |
+
+#### 6. End of Line (`$`)
+
+**Definition:** The dollar sign ($) asserts the position at the end of a line. When used at the end of a pattern, it ensures that the match occurs at the end of the line.
+
+| Pattern | Matches | Description |
+|---------|---------|-------------|
+| `end$` | The end | Lines ending with "end" |
+| `!$` | Hello! | Lines ending with "!" |
+| `[0-9]$` | Room 5 | Lines ending with a digit |
+| `ing$` | running | Lines ending with "ing" |
+| `\.txt$` | file.txt | Lines ending with ".txt" |
+
+#### 7. Character Class (`[abc]`)
+
+**Definition:** Square brackets define a character class that matches any single character from the specified set. You can include individual characters or ranges (e.g., a-z, 0-9).
+
+| Pattern | Matches | Description |
+|---------|---------|-------------|
+| `[aeiou]` | cat, dog, pig | Any vowel |
+| `[0-9]` | 123, 456 | Any digit |
+| `[RGB]` | Red, Green, Blue | Any of R, G, or B |
+| `[xyz]at` | xat, yat, zat | x, y, or z followed by "at" |
+| `[123]00` | 100, 200, 300 | 1, 2, or 3 followed by "00" |
+
+#### 8. Negated Character Class (`[^abc]`)
+
+**Definition:** A caret (^) inside square brackets negates the character class, matching any single character NOT in the specified set. This is useful for excluding specific characters.
+
+| Pattern | Matches | Description |
+|---------|---------|-------------|
+| `[^0-9]` | abc, xyz | Any non-digit character |
+| `[^aeiou]` | bcd, fgh | Any non-vowel character |
+| `[^xyz]` | abc, def | Any character except x, y, z |
+| `[^A-Z]` | abc, 123 | Any non-uppercase letter |
+| `[^!@#]` | abc, 123 | Any character except !, @, # |
+
+#### 9. Alternation (`(a|b)`)
+
+**Definition:** The vertical bar (|) within parentheses creates an alternation, allowing you to match one pattern OR another. It acts like a logical OR operator for patterns.
+
+| Pattern | Matches | Description |
+|---------|---------|-------------|
+| `(cat\|dog)` | cat, dog | Either "cat" or "dog" |
+| `(yes\|no)` | yes, no | Either "yes" or "no" |
+| `(up\|down)` | up, down | Either "up" or "down" |
+| `(left\|right)` | left, right | Either "left" or "right" |
+| `(on\|off)` | on, off | Either "on" or "off" |
+
+#### 10. Digit (`\d`)
+
+**Definition:** The \d metacharacter matches any single digit (0-9). It's equivalent to the character class [0-9] and is commonly used for matching numeric values.
+
+| Pattern | Matches | Description |
+|---------|---------|-------------|
+| `\d{3}` | 123, 456 | Exactly three digits |
+| `\d-\d` | 1-2, 3-4 | Digit, hyphen, digit |
+| `\d{2}:\d{2}` | 12:34, 00:00 | Time format (HH:MM) |
+| `\d{4}` | 2024, 1999 | Four-digit year |
+| `\d+\.\d+` | 1.23, 456.789 | Decimal numbers |
+
+#### 11. Word Character (`\w`)
+
+**Definition:** The \w metacharacter matches any word character including letters, digits, and underscores. It's equivalent to the character class [a-zA-Z0-9_] and is useful for matching parts of words.
+
+| Pattern | Matches | Description |
+|---------|---------|-------------|
+| `\w+` | Hello123, Test_1 | One or more word characters |
+| `\w{5}` | Hello, World | Exactly 5 word characters |
+| `\w+_\w+` | first_name | Words connected by underscore |
+| `\w{2}\d{2}` | AB12, XY34 | 2 letters followed by 2 digits |
+| `\w+@\w+` | user@domain | Simple email format |
+
+#### 12. Whitespace (`\s`)
+
+**Definition:** The \s metacharacter matches any whitespace character including spaces, tabs, and newlines. It's useful for matching spacing between words or parts of a pattern.
+
+| Pattern | Matches | Description |
+|---------|---------|-------------|
+| `word\sword` | word word | Words separated by whitespace |
+| `\s{2,}` | "  " | Two or more whitespace characters |
+| `name:\svalue` | name: value | Name-value pair with space |
+| `\w+\s\w+` | John Doe | Two words separated by space |
+| `\d+\s\w+` | 5 apples | Number followed by word |
+
+### Complex Pattern Examples
+
+Here are examples combining multiple regular expression patterns to solve common matching scenarios:
+
+#### Combined Pattern Examples
+
+| Pattern | Description | Matches | Doesn't Match |
+|---------|-------------|---------|---------------|
+| `^[A-Z][a-z]+$` | Properly capitalized word | "Hello", "John", "Mary" | "hello", "JOHN", "mary" |
+| `\d{3}[-\s]?\d{3}[-\s]?\d{4}` | Phone number formats | "123-456-7890", "123 456 7890", "1234567890" | "123-45-6789", "12345", "abc-def-ghij" |
+| `[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}` | Email address | "user@domain.com", "john.doe@company.co.uk" | "@domain.com", "user@.com", "user@domain" |
+| `^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$` | URL | "https://website.com", "domain.co.uk/path" | "http:/website", ".com", "https://" |
+| `^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$` | Password validation | "Pass1word", "1Security" | "password", "12345678", "Pass" |
+| `^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$` | 24-hour time format | "23:59", "00:00", "9:30" | "24:00", "12:60", "9:99" |
+| `^\$\d{1,3}(,\d{3})*(\.\d{2})?$` | Currency format | "$123.45", "$1,234.56", "$1,234,567.89" | "$12345", "1234.56", "$123.456" |
+| `^(19\|20)\d\d[- /.](0[1-9]\|1[012])[- /.](0[1-9]\|[12][0-9]\|3[01])$` | Date format (YYYY-MM-DD) | "2023-12-31", "1999/01/01" | "2023-13-01", "99-12-31", "2023-12-32" |
+| `^[A-Z]{2}\d{2}[A-Z]{2}\d{4}$` | Vehicle registration | "AB12CD3456", "XY98ZW1234" | "A12CD3456", "AB1234", "12ABCD3456" |
+| `^#([A-Fa-f0-9]{6}\|[A-Fa-f0-9]{3})$` | Hex color code | "#FF0000", "#f00", "#BADA55" | "FF0000", "#XYZ", "#GGHH11" |
+
+#### Explanation of Complex Patterns:
+
+1. **Capitalized Word**
+   - `^` - Start of string
+   - `[A-Z]` - First letter capital
+   - `[a-z]+` - Followed by lowercase letters
+   - `$` - End of string
+
+2. **Phone Number**
+   - `\d{3}` - Three digits
+   - `[-\s]?` - Optional hyphen or space
+   - Repeated pattern for area code, prefix, and line number
+
+3. **Email Address**
+   - Username: `[A-Za-z0-9._%+-]+`
+   - `@` symbol
+   - Domain: `[A-Za-z0-9.-]+`
+   - TLD: `\.[A-Za-z]{2,}`
+
+4. **URL**
+   - Optional protocol: `(https?:\/\/)?`
+   - Domain: `[\da-z\.-]+`
+   - TLD: `([a-z\.]{2,6})`
+   - Optional path: `([\/\w \.-]*)*\/?`
+
+5. **Password Validation**
+   - `(?=.*[A-Za-z])` - At least one letter
+   - `(?=.*\d)` - At least one digit
+   - `[A-Za-z\d]{8,}` - Minimum 8 characters
+
+6. **24-hour Time**
+   - Hours: `([0-1]?[0-9]|2[0-3])`
+   - Minutes: `:[0-5][0-9]`
+
+7. **Currency Format**
+   - `^\$` - Starts with dollar sign
+   - `\d{1,3}` - 1-3 digits
+   - `(,\d{3})*` - Optional groups of 3 digits
+   - `(\.\d{2})?` - Optional decimal places
+
+8. **Date Format**
+   - Year: `(19|20)\d\d`
+   - Month: `(0[1-9]|1[012])`
+   - Day: `(0[1-9]|[12][0-9]|3[01])`
+   - Separated by `-`, `/`, or `.`
+
+9. **Vehicle Registration**
+   - Two letters: `[A-Z]{2}`
+   - Two numbers: `\d{2}`
+   - Two more letters: `[A-Z]{2}`
+   - Four numbers: `\d{4}`
+
+10. **Hex Color Code**
+    - Starts with #: `^#`
+    - Either 6 or 3 characters: `([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})`
+    - Valid hex digits only
+
+These complex patterns demonstrate how different regex elements can be combined to create powerful matching patterns for real-world scenarios.
+
