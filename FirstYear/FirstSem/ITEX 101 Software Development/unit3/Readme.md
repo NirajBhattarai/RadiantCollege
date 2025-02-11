@@ -1433,28 +1433,7 @@ echo "</html>"
 | `CONTENT_LENGTH` | Length of POST data | 1024 |
 | `CONTENT_TYPE` | Type of POST data | application/x-www-form-urlencoded |
 
-### Processing Form Data
-```bash
-#!/bin/bash
-echo "Content-type: text/html"
-echo ""
 
-# Process GET data
-if [ "$REQUEST_METHOD" = "GET" ]; then
-    # Parse QUERY_STRING
-    IFS='&' read -ra PARAMS <<< "$QUERY_STRING"
-    for param in "${PARAMS[@]}"; do
-        IFS='=' read -r key value <<< "$param"
-        echo "Parameter $key = $value<br>"
-    done
-fi
-
-# Process POST data
-if [ "$REQUEST_METHOD" = "POST" ]; then
-    read -n "$CONTENT_LENGTH" POST_DATA
-    echo "Received POST data: $POST_DATA<br>"
-fi
-```
 
 ## HTTP Protocol
 
